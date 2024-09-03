@@ -2,6 +2,12 @@ window.onload  = function(){
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
 
+    let score = 0;
+    let snakeImage = new Image();
+    snakeImage.src = './img/snake.png'; 
+    let appleImage = new Image();
+    appleImage.src = './img/apple.png'; 
+
     snake = [];
     positionX = 10;
     positionY = 10;
@@ -14,91 +20,68 @@ window.onload  = function(){
     gridY = 23;
     tam = 3;
 
-
     setInterval(jogo, 100);
 
     document.addEventListener("keydown",function(e){
         switch(e.keyCode){
-            // Seta Direita = 39
-            case 39:
+            case 39: // Seta Direita
                 velX = 1;
                 velY = 0;
                 break;
-            // Seta Esquerda = 37
-            case 37:
+            case 37: // Seta Esquerda
                 velX = -1;
                 velY = 0;
                 break;
-            // Seta para Cima = 38
-            case 38:
+            case 38: // Seta para Cima
                 velX = 0;
                 velY = -1;
                 break;
-            // Seta para baixo = 40
-            case 40:
+            case 40: // Seta para baixo
                 velX = 0;
                 velY = 1;
                 break;
-
-            // D para Direita = 68
-            case 68:
+            case 68: // D para Direita
                 velX = 1;
                 velY = 0;
                 break;
-
-            // A para Esquerda = 65
-            case 65:
+            case 65: // A para Esquerda
                 velX = -1;
                 velY = 0;
                 break;
-
-            // W para cima = 87
-            case 87:
+            case 87: // W para cima
                 velX = 0;
                 velY = -1;
                 break;
-                
-            // S para baixo = 83
-            case 83:
+            case 83: // S para baixo
                 velX = 0;
                 velY = 1;
                 break; 
         }
     });
 }
+
 function jogo(){
     // Configurando Tela
     ctx.fillStyle = "#851E3E";
-    
-    // Distancia  borda h, distancia borda v, largura, altura
-    ctx.fillRect(0,0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Deslocamento da Cobra
     positionX += velX;
     positionY += velY;
 
-    // Espelhamento da Cobra
-    if(positionX < 0){
-        positionX = 45;
-    }
-    else if (positionX > 44){
-        positionX = 0;
-    }
-    if (positionY < 0){
-        positionY = 24;
-    }
-    else if(positionY > 24){
-        positionY = 0;
+    // Verificar se a cobra bateu na parede (Game Over)
+    if (positionX < 0 || positionX >= gridX || positionY < 0 || positionY >= gridY) {
+        resetGame();
     }
 
     // Configuração da Cobra
     ctx.fillStyle = "#1E312B";
-    for(let i=0; i < snake.length; i++){
-        ctx.fillRect(snake[i].x*grid, snake[i].y*grid, grid-1, grid-1);
+    for(let i = 0; i < snake.length; i++){
+        ctx.fillRect(snake[i].x * grid, snake[i].y * grid, grid - 1, grid - 1);
         if(snake[i].x == positionX && snake[i].y == positionY){
-            tam = 3;
+            resetGame();
         }
-        }
+    }
 
     // Posicionando a Cobra
     snake.push({x: positionX, y: positionY});
@@ -110,14 +93,26 @@ function jogo(){
 
     // Configurando a Comida
     ctx.fillStyle = "#B2910D";
-    ctx.fillRect(foodX*grid, foodY*grid, grid-1, grid-1);
+    ctx.fillRect(foodX * grid, foodY * grid, grid - 1, grid - 1);
 
     // Comendo a Comida
-     if(positionX == foodX && positionY ==  foodY){
+    if(positionX == foodX && positionY == foodY){
         tam++;
-        foodX = Math.floor(Math.random()*gridX);    
-        foodY = Math.floor(Math.random()*gridY);
-     }
+        score++;
+        document.getElementById('score').innerText = "Pontuação: " + score;
+        foodX = Math.floor(Math.random() * gridX);    
+        foodY = Math.floor(Math.random() * gridY);
+    }
 }
 
-
+// Função para reiniciar o jogo
+function resetGame() {
+    score = 0;
+    document.getElementById('score').innerText = "Pontuação: " + score;
+    snake = [];
+    tam = 3;
+    positionX = 10;
+    positionY = 10;
+    velX = 0;
+    velY = 0;
+}
