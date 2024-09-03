@@ -86,10 +86,10 @@ nav ul li a:hover {
 
 canvas {
     display: block;
-    margin: 27px auto; /* Centraliza horizontalmente e mantém a margem superior */
+    margin: 27px auto;
     width: 100%;
-    max-width: 900px; /* Largura máxima para manter a responsividade */
-    height: auto; /* Mantém a proporção ao redimensionar */
+    max-width: 900px;
+    height: auto;
     border: 2px black solid;
     border-radius: 1%;
 }
