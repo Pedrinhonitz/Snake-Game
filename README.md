@@ -18,6 +18,7 @@
   <a href="#dart-sobre">Sobre</a> &#xa0; | &#xa0; 
   <a href="#rocket-tecnologias">Tecnologias</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-como-usar">Como Usar</a> &#xa0; | &#xa0;
+  <a href="#joystick-fotos-do-jogo">Fotos do Jogo</a> &#xa0; | &#xa0;
   <a href="#books-padr%C3%B5es-de-commits">Padrões de Commits</a> &#xa0; | &#xa0;
   <a href="https://github.com/Pedrinhonitz" target="_blank">Autor</a>
 </p>
@@ -47,6 +48,9 @@ $ cd Snake-Game
 # Abrindo no VScode
 $ code .
 ```
+
+## :joystick: Fotos do Jogo ##
+![gameplay.png](./img/gameplay.png)
 
 ## :books: Padrões de Commits ##
 
